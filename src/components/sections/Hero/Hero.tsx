@@ -1,0 +1,98 @@
+import { Code2, MessageCircle } from 'lucide-react'
+import { motion, type Variants } from 'framer-motion'
+import { useTheme } from '../../../context/ThemeContext'
+import { portfolioData } from '../../../data/portfolio'
+import { easeOut } from '../../../lib/motion'
+import styles from './Hero.module.css'
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { ...easeOut, delay: i * 0.1 },
+  }),
+}
+
+export default function Hero() {
+  const { theme } = useTheme()
+
+  return (
+    <section id="hero" className={styles.hero}>
+      <img
+        src="/panoramica.png"
+        alt=""
+        className={styles.bgImage}
+        aria-hidden="true"
+      />
+      <div
+        className={`${styles.gradientOverlay} ${theme === 'dark' ? styles.gradientOverlayDark : ''}`}
+        aria-hidden="true"
+      />
+
+      <div className={styles.inner}>
+        <motion.div
+          className={styles.eyebrow}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
+          <span className={styles.eyebrowDot} aria-hidden="true" />
+          Disponible para proyectos
+        </motion.div>
+
+        <motion.h1
+          className={styles.headline}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={1}
+        >
+          {portfolioData.name}{' '}
+        </motion.h1>
+
+        <motion.p
+          className={styles.subhead}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={2}
+        >
+          {portfolioData.role} — {portfolioData.tagline}
+        </motion.p>
+
+        <motion.div
+          className={styles.ctas}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={3}
+        >
+          <a href="#projects" className={styles.darkBtn}>
+            <Code2 size={18} />
+            Ver Proyectos
+          </a>
+          <a href="#contact" className={styles.whiteBtn}>
+            <MessageCircle size={18} />
+            Contactarme
+          </a>
+        </motion.div>
+
+        <motion.div
+          className={styles.techRow}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={4}
+        >
+          {portfolioData.heroTechnologies.map(tech => (
+            <span key={tech} className={styles.techBadge}>
+              {tech}
+            </span>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
