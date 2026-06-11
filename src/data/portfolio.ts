@@ -1,5 +1,5 @@
 export const portfolioData = {
-  name: 'Daniel Rosales',
+  name: 'Daniel Ramón Reina López',
   role: 'Software Engineer & Full Stack Developer',
   tagline: 'Construyendo el futuro, una línea de código a la vez.',
   bio: 'Estudiante de Ingeniería de Software apasionado por crear soluciones tecnológicas elegantes y eficientes. Combino diseño minimalista con arquitecturas robustas para desarrollar productos que marcan la diferencia.',
