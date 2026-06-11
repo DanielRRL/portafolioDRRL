@@ -10,9 +10,44 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 4rem;
   align-items: start;
+}
+
+.photoWrap {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  max-width: 320px;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-bg-primary) 100%
+  );
+}
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .textBlock p {
@@ -49,10 +84,6 @@
   background: var(--color-lavender-wash);
 }
 
-.pastelCard:nth-child(4) {
-  background: var(--color-teal-mist);
-}
-
 .pastelCard:hover {
   transform: translateY(-1px);
 }
@@ -78,14 +109,15 @@
   color: var(--color-primary);
 }
 
-.cvButton {
-  margin-top: 1.5rem;
-}
-
 @media (max-width: 1023px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .photoWrap {
+    margin: 0 auto;
+    max-width: 280px;
   }
 }
 
@@ -96,5 +128,9 @@
 
   .pastelGrid {
     grid-template-columns: 1fr;
+  }
+
+  .photoWrap {
+    max-width: 240px;
   }
 }

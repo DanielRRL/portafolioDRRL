@@ -23,56 +23,72 @@ export default function About() {
 
         <div className={styles.grid}>
           <motion.div
-            className={styles.textBlock}
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
+            className={styles.photoWrap}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-80px' }}
+            transition={easeOut}
           >
-            {portfolioData.about.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
+            <img
+              src="/DRRL.png"
+              alt="Daniel Ramón Reina López"
+              className={styles.photo}
+            />
+            <div className={styles.photoFade} aria-hidden="true" />
           </motion.div>
 
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-          >
-            <div className={styles.pastelGrid}>
-              <div className={styles.pastelCard}>
-                <GraduationCap size={18} className={styles.pastelIcon} />
-                <div className={styles.pastelLabel}>Universidad</div>
-                <div className={styles.pastelValue}>{portfolioData.university}</div>
+          <div className={styles.rightCol}>
+            <motion.div
+              className={styles.textBlock}
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+            >
+              {portfolioData.about.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+            >
+              <div className={styles.pastelGrid}>
+                <div className={styles.pastelCard}>
+                  <GraduationCap size={18} className={styles.pastelIcon} />
+                  <div className={styles.pastelLabel}>Universidad</div>
+                  <div className={styles.pastelValue}>{portfolioData.university}</div>
+                </div>
+                <div className={styles.pastelCard}>
+                  <BookOpen size={18} className={styles.pastelIcon} />
+                  <div className={styles.pastelLabel}>Semestre</div>
+                  <div className={styles.pastelValue}>{portfolioData.semester}</div>
+                </div>
+                <div className={styles.pastelCard}>
+                  <MapPin size={18} className={styles.pastelIcon} />
+                  <div className={styles.pastelLabel}>Ubicación</div>
+                  <div className={styles.pastelValue}>{portfolioData.location}</div>
+                </div>
               </div>
-              <div className={styles.pastelCard}>
-                <BookOpen size={18} className={styles.pastelIcon} />
-                <div className={styles.pastelLabel}>Semestre</div>
-                <div className={styles.pastelValue}>{portfolioData.semester}</div>
-              </div>
-              <div className={styles.pastelCard}>
-                <MapPin size={18} className={styles.pastelIcon} />
-                <div className={styles.pastelLabel}>Ubicación</div>
-                <div className={styles.pastelValue}>{portfolioData.location}</div>
-              </div>
-              <div className={styles.pastelCard}>
-                <Download size={18} className={styles.pastelIcon} />
-                <div className={styles.pastelLabel}>Curriculum</div>
-                <a href={portfolioData.cvUrl} download className={styles.pastelValue} style={{ color: 'var(--color-primary)' }}>
-                  Descargar CV
-                </a>
-              </div>
-            </div>
-            <div className={styles.cvButton}>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               <a href={portfolioData.cvUrl} download>
                 <Button variant="dark">
                   <Download size={18} />
                   Descargar CV
                 </Button>
               </a>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
