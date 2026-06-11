@@ -40,33 +40,33 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
           >
-            <div className={styles.infoCards}>
-              <div className={styles.infoCard}>
-                <GraduationCap size={18} style={{ color: 'var(--color-primary)', marginBottom: '0.5rem' }} />
-                <div className={styles.infoCardLabel}>Universidad</div>
-                <div className={styles.infoCardValue}>{portfolioData.university}</div>
+            <div className={styles.pastelGrid}>
+              <div className={styles.pastelCard}>
+                <GraduationCap size={18} className={styles.pastelIcon} />
+                <div className={styles.pastelLabel}>Universidad</div>
+                <div className={styles.pastelValue}>{portfolioData.university}</div>
               </div>
-              <div className={styles.infoCard}>
-                <BookOpen size={18} style={{ color: 'var(--color-primary)', marginBottom: '0.5rem' }} />
-                <div className={styles.infoCardLabel}>Semestre</div>
-                <div className={styles.infoCardValue}>{portfolioData.semester}</div>
+              <div className={styles.pastelCard}>
+                <BookOpen size={18} className={styles.pastelIcon} />
+                <div className={styles.pastelLabel}>Semestre</div>
+                <div className={styles.pastelValue}>{portfolioData.semester}</div>
               </div>
-              <div className={styles.infoCard}>
-                <MapPin size={18} style={{ color: 'var(--color-primary)', marginBottom: '0.5rem' }} />
-                <div className={styles.infoCardLabel}>Ubicación</div>
-                <div className={styles.infoCardValue}>{portfolioData.location}</div>
+              <div className={styles.pastelCard}>
+                <MapPin size={18} className={styles.pastelIcon} />
+                <div className={styles.pastelLabel}>Ubicación</div>
+                <div className={styles.pastelValue}>{portfolioData.location}</div>
               </div>
-              <div className={styles.infoCard}>
-                <Download size={18} style={{ color: 'var(--color-primary)', marginBottom: '0.5rem' }} />
-                <div className={styles.infoCardLabel}>Curriculum</div>
-                <a href={portfolioData.cvUrl} download className={styles.infoCardValue} style={{ color: 'var(--color-primary)' }}>
+              <div className={styles.pastelCard}>
+                <Download size={18} className={styles.pastelIcon} />
+                <div className={styles.pastelLabel}>Curriculum</div>
+                <a href={portfolioData.cvUrl} download className={styles.pastelValue} style={{ color: 'var(--color-primary)' }}>
                   Descargar CV
                 </a>
               </div>
             </div>
             <div className={styles.cvButton}>
               <a href={portfolioData.cvUrl} download>
-                <Button variant="secondary">
+                <Button variant="dark">
                   <Download size={18} />
                   Descargar CV
                 </Button>

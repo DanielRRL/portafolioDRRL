@@ -1,22 +1,22 @@
 .section {
-  padding: 6rem 2rem;
+  padding: var(--section-gap) 2rem;
   background: var(--color-bg-primary);
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
 }
 
 @media (max-width: 767px) {
   .section {
-    padding: 4rem 1rem;
+    padding: 3rem 1rem;
   }
 
   .grid {

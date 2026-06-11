@@ -10,7 +10,7 @@ interface SectionTitleProps {
 export default function SectionTitle({ label, title, description, center }: SectionTitleProps) {
   return (
     <div className={`${styles.wrapper} ${center ? styles.center : ''}`}>
-      <span className={styles.label}>{label}</span>
+      <span className={styles.eyebrow}>{label}</span>
       <h2 className={styles.title}>{title}</h2>
       {description && <p className={styles.description}>{description}</p>}
     </div>
