@@ -18,7 +18,7 @@ export default function Header() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.inner}>
           <a href="#hero" className={styles.logo}>
-            DR<span className={styles.logoDot}>.</span>
+            &lt;<span className={styles.logoDot}>/</span>&gt;
           </a>
 
           <nav className={styles.nav}>
