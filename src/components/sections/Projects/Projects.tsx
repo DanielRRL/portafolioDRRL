@@ -1,23 +1,14 @@
-import { motion, type Variants } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import ProjectCard from '../../ui/ProjectCard'
+import Carousel from '../../ui/Carousel'
 import { portfolioData } from '../../../data/portfolio'
-import { easeOutCard } from '../../../lib/motion'
 import styles from './Projects.module.css'
 
-const stagger: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
-}
-
-const card: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: easeOutCard },
-}
-
 export default function Projects() {
+  const cards = portfolioData.projects.map(project => (
+    <ProjectCard key={project.title} {...project} />
+  ))
+
   return (
     <section id="projects" className={styles.section}>
       <div className={styles.inner}>
@@ -28,19 +19,7 @@ export default function Projects() {
           center
         />
 
-        <motion.div
-          className={styles.grid}
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          {portfolioData.projects.map(project => (
-            <motion.div key={project.title} variants={card}>
-              <ProjectCard {...project} />
-            </motion.div>
-          ))}
-        </motion.div>
+        <Carousel items={cards} interval={3000} />
       </div>
     </section>
   )

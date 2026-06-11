@@ -1,9 +1,9 @@
 import { type FormEvent, useState } from 'react'
 import { CheckCircle, Loader2, Send } from 'lucide-react'
-import { motion, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import Button from '../../ui/Button'
-import { easeOut } from '../../../lib/motion'
+import { bounceInLeft, easeOut } from '../../../lib/motion'
 import styles from './Contact.module.css'
 
 interface FormData {
@@ -17,11 +17,6 @@ interface FormErrors {
   name?: string
   email?: string
   message?: string
-}
-
-const fadeIn: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: easeOut },
 }
 
 export default function Contact() {
@@ -104,7 +99,7 @@ export default function Contact() {
         <motion.form
           className={styles.form}
           onSubmit={handleSubmit}
-          variants={fadeIn}
+          variants={bounceInLeft}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}

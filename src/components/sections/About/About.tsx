@@ -3,7 +3,8 @@ import { motion, type Variants } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import Button from '../../ui/Button'
 import { portfolioData } from '../../../data/portfolio'
-import { easeOut } from '../../../lib/motion'
+import { easeOut, bounceInLeft } from '../../../lib/motion'
+import { useTilt } from '../../../hooks/useTilt'
 import styles from './About.module.css'
 
 const fadeIn: Variants = {
@@ -12,6 +13,8 @@ const fadeIn: Variants = {
 }
 
 export default function About() {
+  const { tilt, onMouseMove, onMouseLeave } = useTilt(8)
+
   return (
     <section id="about" className={styles.section}>
       <div className={styles.inner}>
@@ -23,24 +26,33 @@ export default function About() {
 
         <div className={styles.grid}>
           <motion.div
-            className={styles.photoWrap}
+            className={styles.tiltContainer}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={easeOut}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
           >
-            <img
-              src="/DRRL.png"
-              alt="Daniel Ramón Reina López"
-              className={styles.photo}
-            />
-            <div className={styles.photoFade} aria-hidden="true" />
+            <div
+              className={styles.tiltInner}
+              style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
+            >
+              <div className={styles.photoWrap}>
+                <img
+                  src="/DRRL.png"
+                  alt="Daniel Ramón Reina López"
+                  className={styles.photo}
+                />
+                <div className={styles.photoFade} aria-hidden="true" />
+              </div>
+            </div>
           </motion.div>
 
           <div className={styles.rightCol}>
             <motion.div
               className={styles.textBlock}
-              variants={fadeIn}
+              variants={bounceInLeft}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}

@@ -1,7 +1,7 @@
 import { Code2, MessageCircle } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import { portfolioData } from '../../../data/portfolio'
-import { easeOut } from '../../../lib/motion'
+import { easeOut, backInDown, bounceInLeft } from '../../../lib/motion'
 import styles from './Hero.module.css'
 
 const fadeUp: Variants = {
@@ -39,20 +39,20 @@ export default function Hero() {
 
         <motion.h1
           className={styles.headline}
-          variants={fadeUp}
+          variants={backInDown}
           initial="hidden"
           animate="visible"
-          custom={1}
+          custom={0}
         >
           {portfolioData.name}
         </motion.h1>
 
         <motion.p
           className={styles.subhead}
-          variants={fadeUp}
+          variants={bounceInLeft}
           initial="hidden"
           animate="visible"
-          custom={2}
+          custom={1}
         >
           {portfolioData.role} — {portfolioData.tagline}
         </motion.p>
@@ -62,7 +62,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          custom={3}
+          custom={2}
         >
           <a href="#projects" className={styles.darkBtn}>
             <Code2 size={18} />
@@ -79,7 +79,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          custom={4}
+          custom={3}
         >
           {portfolioData.heroTechnologies.map(tech => (
             <span key={tech} className={styles.techBadge}>

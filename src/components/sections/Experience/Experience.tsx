@@ -1,17 +1,8 @@
-import { motion, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import { portfolioData } from '../../../data/portfolio'
-import { easeOutX } from '../../../lib/motion'
+import { bounceInLeft } from '../../../lib/motion'
 import styles from './Experience.module.css'
-
-const item: Variants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { ...easeOutX, delay: i * 0.12 },
-  }),
-}
 
 export default function Experience() {
   return (
@@ -28,7 +19,7 @@ export default function Experience() {
             <motion.div
               key={exp.title + exp.company}
               className={styles.item}
-              variants={item}
+              variants={bounceInLeft}
               custom={i}
               initial="hidden"
               whileInView="visible"
