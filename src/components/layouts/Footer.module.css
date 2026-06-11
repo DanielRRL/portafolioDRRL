@@ -124,8 +124,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border-light);
   color: var(--color-text-secondary);
@@ -164,6 +164,13 @@
 
 .heart {
   color: var(--color-coral-marker);
+}
+
+@media (max-width: 1023px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 767px) {

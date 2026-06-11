@@ -9,8 +9,14 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  overflow-x: hidden;
   overflow-y: scroll;
+  max-width: 100%;
   height: 100vh;
+  height: 100dvh;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,6 +27,7 @@ body {
   line-height: var(--leading-body);
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
+  overflow-x: hidden;
   transition: background-color var(--transition-base), color var(--transition-base);
 }
 
@@ -59,7 +66,10 @@ textarea {
 section[id] {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
