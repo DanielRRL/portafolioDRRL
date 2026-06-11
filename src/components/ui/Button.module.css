@@ -64,6 +64,11 @@
   box-shadow: var(--shadow-subtle);
 }
 
+[data-theme="dark"] .dark {
+  background: #1E293B;
+  color: #F8FAFC;
+}
+
 .small {
   padding: 0.375rem 0.875rem;
   font-size: var(--text-caption);

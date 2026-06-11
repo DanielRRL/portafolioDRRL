@@ -13,23 +13,26 @@
   object-position: center;
 }
 
-.gradientOverlay {
+.imageOverlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(6, 182, 212, 0.72) 0%,
-    rgba(20, 184, 166, 0.55) 50%,
-    rgba(15, 23, 42, 0.45) 100%
+    160deg,
+    rgba(6, 182, 212, 0.25) 0%,
+    rgba(15, 23, 42, 0.35) 100%
   );
 }
 
-.gradientOverlayDark {
+.imageFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
   background: linear-gradient(
-    135deg,
-    rgba(11, 17, 32, 0.85) 0%,
-    rgba(6, 182, 212, 0.35) 50%,
-    rgba(34, 211, 238, 0.45) 100%
+    to bottom,
+    transparent 0%,
+    var(--color-bg-primary) 100%
   );
 }
 
@@ -132,6 +135,15 @@
   outline-offset: 2px;
 }
 
+[data-theme="dark"] .darkBtn {
+  background: rgba(15, 23, 42, 0.92);
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .darkBtn:hover {
+  background: rgba(15, 23, 42, 0.98);
+}
+
 .whiteBtn {
   display: inline-flex;
   align-items: center;
@@ -160,6 +172,17 @@
 .whiteBtn:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 2px;
+}
+
+[data-theme="dark"] .whiteBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .whiteBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .techRow {

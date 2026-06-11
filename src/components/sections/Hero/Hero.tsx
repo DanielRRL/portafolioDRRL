@@ -1,6 +1,5 @@
 import { Code2, MessageCircle } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
-import { useTheme } from '../../../context/ThemeContext'
 import { portfolioData } from '../../../data/portfolio'
 import { easeOut } from '../../../lib/motion'
 import styles from './Hero.module.css'
@@ -15,20 +14,16 @@ const fadeUp: Variants = {
 }
 
 export default function Hero() {
-  const { theme } = useTheme()
-
   return (
     <section id="hero" className={styles.hero}>
       <img
-        src="/panoramica.png"
+        src="/paronamica.png"
         alt=""
         className={styles.bgImage}
         aria-hidden="true"
       />
-      <div
-        className={`${styles.gradientOverlay} ${theme === 'dark' ? styles.gradientOverlayDark : ''}`}
-        aria-hidden="true"
-      />
+      <div className={styles.imageOverlay} aria-hidden="true" />
+      <div className={styles.imageFade} aria-hidden="true" />
 
       <div className={styles.inner}>
         <motion.div
@@ -49,7 +44,7 @@ export default function Hero() {
           animate="visible"
           custom={1}
         >
-          {portfolioData.name}{' '}
+          {portfolioData.name}
         </motion.h1>
 
         <motion.p

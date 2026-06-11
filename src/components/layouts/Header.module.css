@@ -21,6 +21,44 @@
   background: rgba(11, 17, 32, 0.85);
 }
 
+.header:not(.scrolled) .logo {
+  color: #ffffff;
+}
+
+.header:not(.scrolled) .logo .logoDot {
+  color: #ffffff;
+}
+
+.header:not(.scrolled) .navLink {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.header:not(.scrolled) .navLink:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.header:not(.scrolled) .themeToggle {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header:not(.scrolled) .themeToggle:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.header:not(.scrolled) .hamburger {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header:not(.scrolled) .hamburger:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .inner {
   max-width: var(--page-max-width);
   margin: 0 auto;
