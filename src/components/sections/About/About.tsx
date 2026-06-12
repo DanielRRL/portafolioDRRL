@@ -2,7 +2,8 @@ import { Download, GraduationCap, MapPin, BookOpen } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import Button from '../../ui/Button'
-import { portfolioData } from '../../../data/portfolio'
+import { useLanguage } from '../../../context/LanguageContext'
+import { getPortfolioData, t } from '../../../data/portfolio'
 import { easeOut, bounceInLeft } from '../../../lib/motion'
 import { useTilt } from '../../../hooks/useTilt'
 import styles from './About.module.css'
@@ -13,15 +14,17 @@ const fadeIn: Variants = {
 }
 
 export default function About() {
+  const { lang } = useLanguage()
+  const data = getPortfolioData(lang)
   const { tilt, onMouseMove, onMouseLeave } = useTilt(8)
 
   return (
     <section id="about" className={styles.section}>
       <div className={styles.inner}>
         <SectionTitle
-          label="Sobre mí"
-          title="Ingeniero de Software en formación"
-          description="Un vistazo a quién soy y qué me impulsa a crear tecnología."
+          label={t('about.title', lang)}
+          title={t('about.subtitle', lang)}
+          description={t('about.description', lang)}
         />
 
         <div className={styles.grid}>
@@ -41,12 +44,12 @@ export default function About() {
               <div className={styles.photoWrap}>
                 <img
                   src="/DRRL.webp"
-                  width="320"
-                  height="320"
                   alt="Daniel Ramón Reina López"
                   className={styles.photo}
                   loading="lazy"
                   decoding="async"
+                  width="320"
+                  height="320"
                 />
                 <div className={styles.photoFade} aria-hidden="true" />
               </div>
@@ -61,7 +64,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
             >
-              {portfolioData.about.map((paragraph, i) => (
+              {data.about.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </motion.div>
@@ -75,18 +78,18 @@ export default function About() {
               <div className={styles.pastelGrid}>
                 <div className={styles.pastelCard}>
                   <GraduationCap size={18} className={styles.pastelIcon} />
-                  <div className={styles.pastelLabel}>Universidad</div>
-                  <div className={styles.pastelValue}>{portfolioData.university}</div>
+                  <div className={styles.pastelLabel}>{t('about.university', lang)}</div>
+                  <div className={styles.pastelValue}>{data.university}</div>
                 </div>
                 <div className={styles.pastelCard}>
                   <BookOpen size={18} className={styles.pastelIcon} />
-                  <div className={styles.pastelLabel}>Semestre</div>
-                  <div className={styles.pastelValue}>{portfolioData.semester}</div>
+                  <div className={styles.pastelLabel}>{t('about.semester', lang)}</div>
+                  <div className={styles.pastelValue}>{data.semester}</div>
                 </div>
                 <div className={styles.pastelCard}>
                   <MapPin size={18} className={styles.pastelIcon} />
-                  <div className={styles.pastelLabel}>Ubicación</div>
-                  <div className={styles.pastelValue}>{portfolioData.location}</div>
+                  <div className={styles.pastelLabel}>{t('about.location', lang)}</div>
+                  <div className={styles.pastelValue}>{data.location}</div>
                 </div>
               </div>
             </motion.div>
@@ -97,10 +100,10 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <a href={portfolioData.cvUrl} download>
+              <a href={data.cvUrl} download>
                 <Button variant="dark">
                   <Download size={18} />
-                  Descargar CV
+                  {t('about.downloadCv', lang)}
                 </Button>
               </a>
             </motion.div>

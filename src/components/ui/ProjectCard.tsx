@@ -1,4 +1,6 @@
 import { ExternalLink, Code2 } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
+import { t } from '../../data/portfolio'
 import styles from './ProjectCard.module.css'
 
 interface ProjectCardProps {
@@ -18,6 +20,8 @@ export default function ProjectCard({
   github,
   demo,
 }: ProjectCardProps) {
+  const { lang } = useLanguage()
+
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
@@ -51,13 +55,13 @@ export default function ProjectCard({
           {github && (
             <a href={github} target="_blank" rel="noopener noreferrer" className={styles.link}>
               <Code2 className={styles.linkIcon} />
-              Código
+              {t('project.code', lang)}
             </a>
           )}
           {demo && (
             <a href={demo} target="_blank" rel="noopener noreferrer" className={styles.link}>
               <ExternalLink className={styles.linkIcon} />
-              Demo
+              {t('project.demo', lang)}
             </a>
           )}
         </div>

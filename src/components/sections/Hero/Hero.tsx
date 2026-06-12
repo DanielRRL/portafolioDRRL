@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { Code2, MessageCircle } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
-import { portfolioData } from '../../../data/portfolio'
+import { useLanguage } from '../../../context/LanguageContext'
+import { getPortfolioData, t } from '../../../data/portfolio'
 import { easeOut, backInDown, backInDownSimple } from '../../../lib/motion'
 import IconCarousel from '../../ui/IconCarousel'
 import styles from './Hero.module.css'
@@ -16,6 +17,8 @@ const fadeUp: Variants = {
 }
 
 export default function Hero() {
+  const { lang } = useLanguage()
+  const data = getPortfolioData(lang)
   const isMobile = useMemo(
     () => window.matchMedia('(max-width: 767px)').matches,
     [],
@@ -48,7 +51,7 @@ export default function Hero() {
           custom={0}
         >
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          Disponible para proyectos
+          {t('hero.eyebrow', lang)}
         </motion.div>
 
         <motion.h1
@@ -58,7 +61,7 @@ export default function Hero() {
           animate="visible"
           custom={0}
         >
-          {portfolioData.name}
+          {data.name}
         </motion.h1>
 
         <motion.p
@@ -68,7 +71,7 @@ export default function Hero() {
           animate="visible"
           custom={1}
         >
-          {portfolioData.role}
+          {data.role}
         </motion.p>
 
         <motion.div
@@ -80,11 +83,11 @@ export default function Hero() {
         >
           <a href="#projects" className={styles.darkBtn}>
             <Code2 size={iconSize} />
-            Ver Proyectos
+            {t('hero.projectsBtn', lang)}
           </a>
           <a href="#contact" className={styles.whiteBtn}>
             <MessageCircle size={iconSize} />
-            Contactarme
+            {t('hero.contactBtn', lang)}
           </a>
         </motion.div>
 

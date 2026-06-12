@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
+import { useLanguage } from '../../context/LanguageContext'
+import { t } from '../../data/portfolio'
 import styles from './Carousel.module.css'
 
 interface CarouselProps {
@@ -11,6 +13,7 @@ interface CarouselProps {
 const SWIPE_THRESHOLD = 50
 
 export default function Carousel({ items, interval = 3000 }: CarouselProps) {
+  const { lang } = useLanguage()
   const [index, setIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(2)
   const [isPaused, setIsPaused] = useState(false)
@@ -104,7 +107,7 @@ export default function Carousel({ items, interval = 3000 }: CarouselProps) {
               key={i}
               className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
               onClick={() => goTo(i)}
-              aria-label={`Ir a proyecto ${i + 1}`}
+              aria-label={`${t('carousel.goto', lang)} ${i + 1}`}
             />
           ))}
         </div>

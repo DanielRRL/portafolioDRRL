@@ -3,6 +3,8 @@ import { CheckCircle, Loader2, Send } from 'lucide-react'
 import { motion } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import Button from '../../ui/Button'
+import { useLanguage } from '../../../context/LanguageContext'
+import { t } from '../../../data/portfolio'
 import { bounceInLeft, easeOut } from '../../../lib/motion'
 import styles from './Contact.module.css'
 
@@ -20,6 +22,8 @@ interface FormErrors {
 }
 
 export default function Contact() {
+  const { lang } = useLanguage()
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -32,13 +36,13 @@ export default function Contact() {
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {}
-    if (!formData.name.trim()) newErrors.name = 'El nombre es requerido'
+    if (!formData.name.trim()) newErrors.name = t('contact.error.name', lang)
     if (!formData.email.trim()) {
-      newErrors.email = 'El correo es requerido'
+      newErrors.email = t('contact.error.email', lang)
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Ingresa un correo válido'
+      newErrors.email = t('contact.error.emailInvalid', lang)
     }
-    if (!formData.message.trim()) newErrors.message = 'El mensaje es requerido'
+    if (!formData.message.trim()) newErrors.message = t('contact.error.message', lang)
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -76,9 +80,9 @@ export default function Contact() {
             transition={easeOut}
           >
             <CheckCircle className={styles.successIcon} />
-            <h3 className={styles.successTitle}>¡Mensaje enviado!</h3>
+            <h3 className={styles.successTitle}>{t('contact.success.title', lang)}</h3>
             <p className={styles.successText}>
-              Gracias por contactarme. Te responderé lo antes posible.
+              {t('contact.success.text', lang)}
             </p>
           </motion.div>
         </div>
@@ -90,9 +94,9 @@ export default function Contact() {
     <section id="contact" className={styles.section}>
       <div className={styles.inner}>
         <SectionTitle
-          label="Contacto"
-          title="Hablemos"
-          description="¿Tienes un proyecto en mente o quieres colaborar? Escríbeme."
+          label={t('contact.label', lang)}
+          title={t('contact.title', lang)}
+          description={t('contact.description', lang)}
           center
         />
 
@@ -108,13 +112,13 @@ export default function Contact() {
           <div className={styles.row}>
             <div className={styles.field}>
               <label htmlFor="name" className={styles.label}>
-                Nombre <span className={styles.required}>*</span>
+                {t('contact.name', lang)} <span className={styles.required}>*</span>
               </label>
               <input
                 id="name"
                 type="text"
                 className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
-                placeholder="Tu nombre"
+                placeholder={t('contact.namePlaceholder', lang)}
                 value={formData.name}
                 onChange={e => handleChange('name', e.target.value)}
               />
@@ -123,13 +127,13 @@ export default function Contact() {
 
             <div className={styles.field}>
               <label htmlFor="email" className={styles.label}>
-                Correo <span className={styles.required}>*</span>
+                {t('contact.email', lang)} <span className={styles.required}>*</span>
               </label>
               <input
                 id="email"
                 type="email"
                 className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
-                placeholder="tu@correo.com"
+                placeholder={t('contact.emailPlaceholder', lang)}
                 value={formData.email}
                 onChange={e => handleChange('email', e.target.value)}
               />
@@ -139,13 +143,13 @@ export default function Contact() {
 
           <div className={styles.field}>
             <label htmlFor="subject" className={styles.label}>
-              Asunto
+              {t('contact.subject', lang)}
             </label>
             <input
               id="subject"
               type="text"
               className={styles.input}
-              placeholder="¿De qué quieres hablar?"
+              placeholder={t('contact.subjectPlaceholder', lang)}
               value={formData.subject}
               onChange={e => handleChange('subject', e.target.value)}
             />
@@ -153,12 +157,12 @@ export default function Contact() {
 
           <div className={styles.field}>
             <label htmlFor="message" className={styles.label}>
-              Mensaje <span className={styles.required}>*</span>
+              {t('contact.message', lang)} <span className={styles.required}>*</span>
             </label>
             <textarea
               id="message"
               className={`${styles.textarea} ${errors.message ? styles.inputError : ''}`}
-              placeholder="Cuéntame sobre tu proyecto o idea..."
+              placeholder={t('contact.messagePlaceholder', lang)}
               value={formData.message}
               onChange={e => handleChange('message', e.target.value)}
             />
@@ -169,12 +173,12 @@ export default function Contact() {
             {loading ? (
               <>
                 <Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} />
-                Enviando...
+                {t('contact.sending', lang)}
               </>
             ) : (
               <>
                 <Send size={18} />
-                Enviar mensaje
+                {t('contact.submit', lang)}
               </>
             )}
           </Button>

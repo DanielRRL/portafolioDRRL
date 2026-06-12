@@ -2,7 +2,8 @@ import { Monitor, Server, Database, Cloud, Shield, Sparkles } from 'lucide-react
 import { motion, type Variants } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import ClosingPlasma from '../../ui/ClosingPlasma'
-import { portfolioData } from '../../../data/portfolio'
+import { useLanguage } from '../../../context/LanguageContext'
+import { getPortfolioData, t, techCategoryLabel } from '../../../data/portfolio'
 import { easeOutFast } from '../../../lib/motion'
 import styles from './Technologies.module.css'
 
@@ -28,6 +29,9 @@ const item: Variants = {
 }
 
 export default function Technologies() {
+  const { lang } = useLanguage()
+  const data = getPortfolioData(lang)
+
   return (
     <section id="technologies" className={styles.section}>
       <ClosingPlasma
@@ -50,13 +54,13 @@ export default function Technologies() {
       <div className={styles.fadeBottom} />
       <div className={styles.inner}>
         <SectionTitle
-          label="Tecnologías"
-          title="Stack tecnológico"
-          description="Herramientas y tecnologías con las que trabajo día a día."
+          label={t('tech.label', lang)}
+          title={t('tech.title', lang)}
+          description={t('tech.description', lang)}
           center
         />
 
-        {Object.entries(portfolioData.technologies).map(([category, techs]) => {
+        {Object.entries(data.technologies).map(([category, techs]) => {
           const Icon = categoryIcons[category] ?? Monitor
           return (
             <motion.div
@@ -68,12 +72,7 @@ export default function Technologies() {
               viewport={{ once: true, margin: '-40px' }}
             >
               <div className={styles.categoryLabel}>
-                {category === 'frontend' && 'Frontend'}
-                {category === 'backend' && 'Backend'}
-                {category === 'database' && 'Bases de Datos'}
-                {category === 'devops' && 'DevOps & Cloud'}
-                {category === 'auth' && 'Auth & Seguridad'}
-                {category === 'ai' && 'IA & Automatización'}
+                {techCategoryLabel(category, lang)}
               </div>
               <motion.div className={styles.grid} variants={stagger}>
                 {techs.map(tech => (

@@ -1,8 +1,11 @@
 import { Mail, MapPin } from 'lucide-react'
-import { portfolioData } from '../../data/portfolio'
+import { useLanguage } from '../../context/LanguageContext'
+import { getPortfolioData, t } from '../../data/portfolio'
 import styles from './Footer.module.css'
 
 export default function Footer() {
+  const { lang } = useLanguage()
+  const data = getPortfolioData(lang)
   const currentYear = new Date().getFullYear()
 
   return (
@@ -13,13 +16,13 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <div className={styles.brandName}>
-              {portfolioData.name.split(' ')[0]}
+              {data.name.split(' ')[0]}
               <span className={styles.brandDot}>.</span>
             </div>
-            <p className={styles.brandDesc}>{portfolioData.tagline}</p>
+            <p className={styles.brandDesc}>{data.tagline}</p>
             <div className={styles.socialLinks}>
               <a
-                href={portfolioData.social.github}
+                href={data.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -28,7 +31,7 @@ export default function Footer() {
                 <img src="/github-icon.svg" alt="GitHub" className={styles.socialIconImg} />
               </a>
               <a
-                href={portfolioData.social.linkedin}
+                href={data.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -37,7 +40,7 @@ export default function Footer() {
                 <img src="/linkedin.webp" alt="LinkedIn" className={styles.socialIconImg} width="24" height="24" />
               </a>
               <a
-                href={portfolioData.social.instagram}
+                href={data.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -49,9 +52,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className={styles.columnTitle}>Navegación</div>
+            <div className={styles.columnTitle}>{t('footer.nav', lang)}</div>
             <div className={styles.linkList}>
-              {portfolioData.navLinks.map(link => (
+              {data.navLinks.map(link => (
                 <a key={link.href} href={link.href} className={styles.linkItem}>
                   {link.label}
                 </a>
@@ -60,19 +63,19 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className={styles.columnTitle}>Contacto</div>
+            <div className={styles.columnTitle}>{t('footer.contact', lang)}</div>
             <div className={styles.contactInfo}>
               <span className={styles.contactRow}>
                 <Mail className={styles.contactIcon} />
-                {portfolioData.email}
+                {data.email}
               </span>
               <span className={styles.contactRow}>
                 <Mail className={styles.contactIcon} />
-                {portfolioData.emailSecondary}
+                {data.emailSecondary}
               </span>
               <span className={styles.contactRow}>
                 <MapPin className={styles.contactIcon} />
-                {portfolioData.location}
+                {data.location}
               </span>
             </div>
           </div>
@@ -80,10 +83,10 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <span className={styles.copyright}>
-            &copy; {currentYear} {portfolioData.name}. Todos los derechos reservados.
+            &copy; {currentYear} {data.name}. {t('footer.rights', lang)}
           </span>
           <span className={styles.madeWith}>
-            Hecho con <span className={styles.heart}>&#9829;</span> y React
+            {t('footer.madeWith', lang)} <span className={styles.heart}>&#9829;</span> y React
           </span>
         </div>
       </div>
