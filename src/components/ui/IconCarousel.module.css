@@ -1,0 +1,47 @@
+.carousel {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  padding: 0.5rem 0;
+}
+
+.track {
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.iconWrap:hover .icon {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}

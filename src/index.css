@@ -68,6 +68,7 @@ section[id] {
   scroll-snap-stop: always;
   width: 100%;
   max-width: 100%;
+  align-items: center;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;

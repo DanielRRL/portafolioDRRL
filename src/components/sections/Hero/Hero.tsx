@@ -2,6 +2,7 @@ import { Code2, MessageCircle } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import { portfolioData } from '../../../data/portfolio'
 import { easeOut, backInDown, bounceInLeft } from '../../../lib/motion'
+import IconCarousel from '../../ui/IconCarousel'
 import styles from './Hero.module.css'
 
 const fadeUp: Variants = {
@@ -81,11 +82,7 @@ export default function Hero() {
           animate="visible"
           custom={3}
         >
-          {portfolioData.heroTechnologies.map(tech => (
-            <span key={tech} className={styles.techBadge}>
-              {tech}
-            </span>
-          ))}
+          <IconCarousel />
         </motion.div>
       </div>
     </section>
