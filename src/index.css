@@ -71,7 +71,6 @@ section[id] {
 }
 
 #about,
-#technologies,
 #projects,
 #experience,
 #contact {
@@ -79,6 +78,18 @@ section[id] {
   contain-intrinsic-size: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4.5rem;
+  padding-bottom: 3rem;
+}
+
+#technologies {
+  content-visibility: auto;
+  contain-intrinsic-size: 100dvh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

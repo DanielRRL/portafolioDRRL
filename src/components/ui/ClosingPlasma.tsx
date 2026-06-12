@@ -64,7 +64,7 @@ float fbm(vec2 p, float turbulence) {
   float amp = 0.5;
   float freq = 1.0;
   mat2 rot = mat2(cos(0.45), sin(0.45), -sin(0.45), cos(0.45));
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 3; i++) {
     total += snoise(p * freq) * amp;
     p = rot * p;
     freq *= mix(1.85, 2.35, clamp(turbulence, 0.0, 2.0) * 0.5);
@@ -89,19 +89,13 @@ void main() {
   );
 
   float n = fbm(p * 2.0 + flow * 1.45, u_turbulence);
-  float ridges = 1.0 - abs(snoise(p * 4.0 + n) * 2.0);
-  ridges = pow(ridges, 3.0);
 
   vec3 colorA = mix(u_lightA, u_darkA, u_isDark);
   vec3 colorB = mix(u_lightB, u_darkB, u_isDark);
   vec3 colorC = mix(u_lightC, u_darkC, u_isDark);
 
   vec3 col = mix(colorA, colorB, smoothstep(-0.5, 0.5, n));
-  col = mix(col, colorC, smoothstep(0.25, 1.0, n * 0.52 + ridges * 0.48));
-
-  float sparkle = pow(max(0.0, snoise(gl_FragCoord.xy * 0.2 + t * 2.0)), 18.0) * 0.5 * u_sparkle;
-  vec3 sparkleColor = mix(vec3(0.56, 0.58, 0.72), vec3(0.8, 0.9, 1.0), u_isDark);
-  col += sparkleColor * sparkle;
+  col = mix(col, colorC, smoothstep(0.25, 1.0, n * 0.52));
 
   float vigDark = 1.0 - smoothstep(0.5, mix(1.8, 1.55, u_isDark), length(p));
   col = mix(col, col * vigDark, u_isDark * u_vignette);
@@ -310,7 +304,7 @@ export default function ClosingPlasma({
     }
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.75)
+      const dpr = Math.min(window.devicePixelRatio || 1, 1)
       const { width, height } = container.getBoundingClientRect()
       canvas.width = Math.max(1, Math.floor(width * dpr))
       canvas.height = Math.max(1, Math.floor(height * dpr))

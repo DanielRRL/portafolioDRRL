@@ -65,7 +65,7 @@ export default function Technologies() {
               variants={stagger}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
+              viewport={{ once: true, margin: '-40px' }}
             >
               <div className={styles.categoryLabel}>
                 {category === 'frontend' && 'Frontend'}

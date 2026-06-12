@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { bounceInLeft } from '../../lib/motion'
+import { bounceInLeftSimple } from '../../lib/motion'
 import styles from './SectionTitle.module.css'
 
 interface SectionTitleProps {
@@ -13,7 +13,7 @@ export default function SectionTitle({ label, title, description, center }: Sect
   return (
     <motion.div
       className={`${styles.wrapper} ${center ? styles.center : ''}`}
-      variants={bounceInLeft}
+      variants={bounceInLeftSimple}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-60px' }}
