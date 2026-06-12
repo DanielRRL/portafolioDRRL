@@ -28,6 +28,8 @@ export default function ProjectCard({
             className={styles.image}
             loading="lazy"
             decoding="async"
+            width="800"
+            height="450"
           />
         ) : (
           <div className={styles.imagePlaceholder}>

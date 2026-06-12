@@ -34,7 +34,7 @@ export default function Footer() {
                 className={styles.socialLink}
                 aria-label="LinkedIn"
               >
-                <img src="/linkedin.png" alt="LinkedIn" className={styles.socialIconImg} />
+                <img src="/linkedin.webp" alt="LinkedIn" className={styles.socialIconImg} width="24" height="24" />
               </a>
               <a
                 href={portfolioData.social.instagram}
@@ -43,7 +43,7 @@ export default function Footer() {
                 className={styles.socialLink}
                 aria-label="Instagram"
               >
-                <img src="/instagram.png" alt="Instagram" className={styles.socialIconImg} />
+                <img src="/instagram.webp" alt="Instagram" className={styles.socialIconImg} width="24" height="24" />
               </a>
             </div>
           </div>

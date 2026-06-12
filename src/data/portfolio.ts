@@ -37,7 +37,7 @@ export const portfolioData = {
     {
       title: 'Variedades Danii',
       description: 'E-commerce completo de perfumería artesanal con soporte de ventas online y punto de venta (POS) presencial. Pagos colombianos, facturación electrónica DIAN y auth Google OAuth 2.0.',
-      image: '/variedadesDanii.png',
+      image: '/variedadesDanii.webp',
       technologies: ['React 19', 'Node.js', 'PostgreSQL', 'Prisma', 'Docker', 'Railway'],
       github: 'https://github.com/DanielRRL/variedadesDanii',
       demo: 'https://www.variedadesdanii.com/',
@@ -45,7 +45,7 @@ export const portfolioData = {
     {
       title: 'SIMÉTRICA',
       description: 'Sitio web corporativo y CRM interno para empresa de construcción, arquitectura y diseño. Panel admin, vitrina de proyectos, bolsa de trabajo y registro de proveedores.',
-      image: '/SIMETRICA.png',
+      image: '/SIMETRICA.webp',
       technologies: ['React 19', 'Express 5', 'MongoDB', 'Mongoose 8', 'Railway'],
       github: 'https://github.com/Jruiz3019/SIM-TRICA',
       demo: 'https://www.xn--simtrica-d1a.com/',
@@ -53,7 +53,7 @@ export const portfolioData = {
     {
       title: 'López & Escobar',
       description: 'ERP jurídico para automatización de procesos legales internos del despacho. Módulos de gestión documental, seguimiento de casos, agenda y APIs REST con Node.js y Spring Boot.',
-      image: '/lopesyescobarabogados.png',
+      image: '/lopesyescobarabogados.webp',
       technologies: ['React', 'Node.js', 'Spring Boot', 'MySQL', 'PostgreSQL'],
       github: 'https://github.com/lopezyescobarabogados/loyestask',
       demo: 'https://lopezyescobarabogados.com',
@@ -61,7 +61,7 @@ export const portfolioData = {
     {
       title: 'PortafolioDRRL',
       description: 'Portafolio web personal construido con React 19, TypeScript, Vite y CSS Modules. Diseño responsive con tema oscuro, animaciones con Framer Motion y arquitectura modular por secciones. Creado con asistencia de IA (OpenCode + DeepSeek V4 Pro) como demostración de integración de LLMs en el flujo de desarrollo.',
-      image: '/portafolio.png',
+      image: '/portafolio.webp',
       technologies: ['React 19', 'TypeScript', 'Vite', 'CSS Modules', 'Framer Motion', 'OpenCode IA'],
       github: 'https://github.com/DanielRRL/portafolioDRRL',
       demo: '',

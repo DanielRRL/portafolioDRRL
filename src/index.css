@@ -8,7 +8,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   overflow-x: hidden;
   overflow-y: scroll;
   max-width: 100%;
@@ -65,7 +65,6 @@ textarea {
 
 section[id] {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
@@ -90,7 +89,6 @@ section[id] {
 
 #footer {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -22,9 +22,17 @@ export default function App() {
         <Hero />
         <Suspense fallback={<SectionFallback />}>
           <About />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <Technologies />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <Experience />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <Contact />
         </Suspense>
       </main>

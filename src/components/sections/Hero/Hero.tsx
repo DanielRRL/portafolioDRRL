@@ -27,7 +27,7 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
       <img
-        src="/paronamica.png"
+        src="/paronamica.webp"
         alt=""
         className={styles.bgImage}
         aria-hidden="true"

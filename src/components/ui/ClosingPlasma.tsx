@@ -337,30 +337,40 @@ export default function ClosingPlasma({
     gl.uniform3f(uLightC, lightC[0], lightC[1], lightC[2])
 
     let rafId = 0
+    let visible = true
     const start = performance.now()
 
-    const render = (now: number) => {
-      const elapsed = (now - start) / 1000
-      mouseRef.current.x += (targetMouseRef.current.x - mouseRef.current.x) * 0.05
-      mouseRef.current.y += (targetMouseRef.current.y - mouseRef.current.y) * 0.05
+    const observer = new IntersectionObserver(
+      ([entry]) => { visible = entry.isIntersecting },
+      { threshold: 0 }
+    )
+    observer.observe(container)
 
-      gl.uniform1f(uTime, elapsed)
-      gl.uniform2f(uMouse, mouseRef.current.x, mouseRef.current.y)
-      gl.uniform1f(uIsDark, isDarkRef.current)
-      gl.uniform1f(uSpeed, settings.speed)
-      gl.uniform1f(uTurbulence, settings.turbulence)
-      gl.uniform1f(uMouseInfluence, settings.mouseInfluence)
-      gl.uniform1f(uGrain, settings.grain)
-      gl.uniform1f(uSparkle, settings.sparkle)
-      gl.uniform1f(uVignette, settings.vignette)
-      gl.uniform1f(uOpacity, settings.opacity)
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+    const render = (now: number) => {
+      if (visible) {
+        const elapsed = (now - start) / 1000
+        mouseRef.current.x += (targetMouseRef.current.x - mouseRef.current.x) * 0.05
+        mouseRef.current.y += (targetMouseRef.current.y - mouseRef.current.y) * 0.05
+
+        gl.uniform1f(uTime, elapsed)
+        gl.uniform2f(uMouse, mouseRef.current.x, mouseRef.current.y)
+        gl.uniform1f(uIsDark, isDarkRef.current)
+        gl.uniform1f(uSpeed, settings.speed)
+        gl.uniform1f(uTurbulence, settings.turbulence)
+        gl.uniform1f(uMouseInfluence, settings.mouseInfluence)
+        gl.uniform1f(uGrain, settings.grain)
+        gl.uniform1f(uSparkle, settings.sparkle)
+        gl.uniform1f(uVignette, settings.vignette)
+        gl.uniform1f(uOpacity, settings.opacity)
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+      }
       rafId = requestAnimationFrame(render)
     }
 
     rafId = requestAnimationFrame(render)
 
     return () => {
+      observer.disconnect()
       container.removeEventListener('pointermove', handlePointerMove)
       container.removeEventListener('pointerleave', handlePointerLeave)
       cancelAnimationFrame(rafId)

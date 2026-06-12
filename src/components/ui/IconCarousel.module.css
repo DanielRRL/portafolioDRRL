@@ -12,6 +12,11 @@
   display: flex;
   width: fit-content;
   will-change: transform;
+  animation: scroll-left 80s linear infinite;
+}
+
+.carousel:hover .track {
+  animation-play-state: paused;
 }
 
 .iconWrap {
@@ -43,5 +48,14 @@
   }
   50% {
     transform: translateY(-4px);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * var(--set-width, 0px)));
   }
 }
