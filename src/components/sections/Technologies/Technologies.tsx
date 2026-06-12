@@ -1,6 +1,7 @@
-import { Monitor, Server, Database, Cloud } from 'lucide-react'
+import { Monitor, Server, Database, Cloud, Shield, Sparkles } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
+import ClosingPlasma from '../../ui/ClosingPlasma'
 import { portfolioData } from '../../../data/portfolio'
 import { easeOutFast } from '../../../lib/motion'
 import styles from './Technologies.module.css'
@@ -10,6 +11,8 @@ const categoryIcons: Record<string, typeof Monitor> = {
   backend: Server,
   database: Database,
   devops: Cloud,
+  auth: Shield,
+  ai: Sparkles,
 }
 
 const stagger: Variants = {
@@ -27,6 +30,24 @@ const item: Variants = {
 export default function Technologies() {
   return (
     <section id="technologies" className={styles.section}>
+      <ClosingPlasma
+        speed={0.7}
+        turbulence={2}
+        mouseInfluence={1}
+        grain={0.8}
+        sparkle={0.65}
+        vignette={1}
+        opacity={1}
+        interactive
+        darkColorA="#071217"
+        darkColorB="#2b616e"
+        darkColorC="#63d8d2"
+        lightColorA="#f0f2f7"
+        lightColorB="#d7dceb"
+        lightColorC="#bcc5e0"
+      />
+      <div className={styles.fadeTop} />
+      <div className={styles.fadeBottom} />
       <div className={styles.inner}>
         <SectionTitle
           label="Tecnologías"
@@ -50,7 +71,9 @@ export default function Technologies() {
                 {category === 'frontend' && 'Frontend'}
                 {category === 'backend' && 'Backend'}
                 {category === 'database' && 'Bases de Datos'}
-                {category === 'devops' && 'DevOps & Infra'}
+                {category === 'devops' && 'DevOps & Cloud'}
+                {category === 'auth' && 'Auth & Seguridad'}
+                {category === 'ai' && 'IA & Automatización'}
               </div>
               <motion.div className={styles.grid} variants={stagger}>
                 {techs.map(tech => (

@@ -1,4 +1,4 @@
-import { Mail, MapPin, ExternalLink } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 import { portfolioData } from '../../data/portfolio'
 import styles from './Footer.module.css'
 
@@ -25,7 +25,7 @@ export default function Footer() {
                 className={styles.socialLink}
                 aria-label="GitHub"
               >
-                <ExternalLink className={styles.socialIcon} />
+                <img src="/github-icon.svg" alt="GitHub" className={styles.socialIconImg} />
               </a>
               <a
                 href={portfolioData.social.linkedin}
@@ -34,16 +34,16 @@ export default function Footer() {
                 className={styles.socialLink}
                 aria-label="LinkedIn"
               >
-                <ExternalLink className={styles.socialIcon} />
+                <img src="/linkedin.png" alt="LinkedIn" className={styles.socialIconImg} />
               </a>
               <a
-                href={portfolioData.social.twitter}
+                href={portfolioData.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
-                aria-label="Twitter"
+                aria-label="Instagram"
               >
-                <ExternalLink className={styles.socialIcon} />
+                <img src="/instagram.png" alt="Instagram" className={styles.socialIconImg} />
               </a>
             </div>
           </div>
@@ -65,6 +65,10 @@ export default function Footer() {
               <span className={styles.contactRow}>
                 <Mail className={styles.contactIcon} />
                 {portfolioData.email}
+              </span>
+              <span className={styles.contactRow}>
+                <Mail className={styles.contactIcon} />
+                {portfolioData.emailSecondary}
               </span>
               <span className={styles.contactRow}>
                 <MapPin className={styles.contactIcon} />

@@ -1,7 +1,8 @@
+import { useMemo } from 'react'
 import { Code2, MessageCircle } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import { portfolioData } from '../../../data/portfolio'
-import { easeOut, backInDown, bounceInLeft } from '../../../lib/motion'
+import { easeOut, backInDown, backInDownSimple } from '../../../lib/motion'
 import IconCarousel from '../../ui/IconCarousel'
 import styles from './Hero.module.css'
 
@@ -15,6 +16,14 @@ const fadeUp: Variants = {
 }
 
 export default function Hero() {
+  const isMobile = useMemo(
+    () => window.matchMedia('(max-width: 767px)').matches,
+    [],
+  )
+
+  const headVariant = isMobile ? backInDownSimple : backInDown
+  const iconSize = isMobile ? 16 : 18
+
   return (
     <section id="hero" className={styles.hero}>
       <img
@@ -22,6 +31,10 @@ export default function Hero() {
         alt=""
         className={styles.bgImage}
         aria-hidden="true"
+        loading="eager"
+        fetchPriority="high"
+        width="1920"
+        height="1080"
       />
       <div className={styles.imageOverlay} aria-hidden="true" />
       <div className={styles.imageFade} aria-hidden="true" />
@@ -40,7 +53,7 @@ export default function Hero() {
 
         <motion.h1
           className={styles.headline}
-          variants={backInDown}
+          variants={headVariant}
           initial="hidden"
           animate="visible"
           custom={0}
@@ -50,12 +63,12 @@ export default function Hero() {
 
         <motion.p
           className={styles.subhead}
-          variants={bounceInLeft}
+          variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={1}
         >
-          {portfolioData.role} — {portfolioData.tagline}
+          {portfolioData.role}
         </motion.p>
 
         <motion.div
@@ -66,11 +79,11 @@ export default function Hero() {
           custom={2}
         >
           <a href="#projects" className={styles.darkBtn}>
-            <Code2 size={18} />
+            <Code2 size={iconSize} />
             Ver Proyectos
           </a>
           <a href="#contact" className={styles.whiteBtn}>
-            <MessageCircle size={18} />
+            <MessageCircle size={iconSize} />
             Contactarme
           </a>
         </motion.div>

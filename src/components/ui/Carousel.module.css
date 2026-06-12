@@ -49,3 +49,24 @@
   width: 1.5rem;
   border-radius: 999px;
 }
+
+@media (max-width: 639px) {
+  .slide,
+  .slide:last-child {
+    padding-right: 0;
+  }
+
+  .dot {
+    width: 0.5625rem;
+    height: 0.5625rem;
+  }
+
+  .dotActive {
+    width: 1.5rem;
+  }
+
+  .dots {
+    gap: 0.625rem;
+    margin-top: 1rem;
+  }
+}

@@ -143,6 +143,11 @@
   height: 0.875rem;
 }
 
+.socialIconImg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
 .bottom {
   display: flex;
   align-items: center;

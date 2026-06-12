@@ -23,6 +23,16 @@ export const backInDown: Variants = {
   }),
 }
 
+export const backInDownSimple: Variants = {
+  hidden: { opacity: 0, y: -16, scale: 0.98 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { ...easeOut, delay: i * 0.05 },
+  }),
+}
+
 export const bounceInLeft: Variants = {
   hidden: { opacity: 0, x: -80 },
   visible: (i = 0) => ({
@@ -35,5 +45,14 @@ export const bounceInLeft: Variants = {
       mass: 0.8,
       delay: i * 0.08,
     },
+  }),
+}
+
+export const bounceInLeftSimple: Variants = {
+  hidden: { opacity: 0, x: -12 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    x: 0,
+    transition: { ...easeOut, delay: i * 0.05 },
   }),
 }

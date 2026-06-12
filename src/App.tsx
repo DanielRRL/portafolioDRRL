@@ -1,12 +1,18 @@
+import { lazy, Suspense } from 'react'
 import Header from './components/layouts/Header'
 import Footer from './components/layouts/Footer'
 import Hero from './components/sections/Hero/Hero'
-import About from './components/sections/About/About'
-import Technologies from './components/sections/Technologies/Technologies'
-import Projects from './components/sections/Projects/Projects'
-import Experience from './components/sections/Experience/Experience'
-import Contact from './components/sections/Contact/Contact'
 import './App.css'
+
+const About = lazy(() => import('./components/sections/About/About'))
+const Technologies = lazy(() => import('./components/sections/Technologies/Technologies'))
+const Projects = lazy(() => import('./components/sections/Projects/Projects'))
+const Experience = lazy(() => import('./components/sections/Experience/Experience'))
+const Contact = lazy(() => import('./components/sections/Contact/Contact'))
+
+function SectionFallback() {
+  return <div style={{ minHeight: '100dvh' }} />
+}
 
 export default function App() {
   return (
@@ -14,11 +20,13 @@ export default function App() {
       <Header />
       <main className="main">
         <Hero />
-        <About />
-        <Technologies />
-        <Projects />
-        <Experience />
-        <Contact />
+        <Suspense fallback={<SectionFallback />}>
+          <About />
+          <Technologies />
+          <Projects />
+          <Experience />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
     </div>

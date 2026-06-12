@@ -43,6 +43,8 @@ export default function About() {
                   src="/DRRL.png"
                   alt="Daniel Ramón Reina López"
                   className={styles.photo}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className={styles.photoFade} aria-hidden="true" />
               </div>

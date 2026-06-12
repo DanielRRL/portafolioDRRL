@@ -1,5 +1,7 @@
 .section {
   padding: var(--section-gap) 2rem;
+  padding-top: 0;
+  padding-bottom: 0;
   background: var(--color-bg-primary);
 }
 
@@ -10,6 +12,6 @@
 
 @media (max-width: 767px) {
   .section {
-    padding: 3rem 1rem;
+    padding: 0 0.75rem;
   }
 }

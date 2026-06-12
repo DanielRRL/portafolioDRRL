@@ -13,6 +13,7 @@ interface ProjectCardProps {
 export default function ProjectCard({
   title,
   description,
+  image,
   technologies,
   github,
   demo,
@@ -20,9 +21,19 @@ export default function ProjectCard({
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <div className={styles.imagePlaceholder}>
-          {title.slice(0, 2).toUpperCase()}
-        </div>
+        {image ? (
+          <img
+            src={image}
+            alt={title}
+            className={styles.image}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div className={styles.imagePlaceholder}>
+            {title.slice(0, 2).toUpperCase()}
+          </div>
+        )}
       </div>
       <div className={styles.body}>
         <h3 className={styles.title}>{title}</h3>
