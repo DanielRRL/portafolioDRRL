@@ -43,7 +43,7 @@ export default function About() {
             >
               <div className={styles.photoWrap}>
                 <img
-                  src="/DRRL.webp"
+                  src="/DRRL.png"
                   alt="Daniel Ramón Reina López"
                   className={styles.photo}
                   loading="lazy"
