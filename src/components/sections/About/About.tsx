@@ -8,15 +8,40 @@ import { easeOut, bounceInLeft } from '../../../lib/motion'
 import { useTilt } from '../../../hooks/useTilt'
 import styles from './About.module.css'
 
-const fadeIn: Variants = {
+const cardStagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+}
+
+const cardItem: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: easeOut },
+  visible: { opacity: 1, y: 0, transition: { ...easeOut, duration: 0.4 } },
 }
 
 export default function About() {
   const { lang } = useLanguage()
   const data = getPortfolioData(lang)
   const { tilt, onMouseMove, onMouseLeave } = useTilt(8)
+
+  const pastelCards = [
+    {
+      icon: GraduationCap,
+      labelKey: 'about.university' as const,
+      value: data.university,
+    },
+    {
+      icon: BookOpen,
+      labelKey: 'about.semester' as const,
+      value: data.semester,
+    },
+    {
+      icon: MapPin,
+      labelKey: 'about.location' as const,
+      value: data.location,
+    },
+  ]
 
   return (
     <section id="about" className={styles.section}>
@@ -70,35 +95,29 @@ export default function About() {
             </motion.div>
 
             <motion.div
-              variants={fadeIn}
+              className={styles.pastelGrid}
+              variants={cardStagger}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, amount: 0.15 }}
             >
-              <div className={styles.pastelGrid}>
-                <div className={styles.pastelCard}>
-                  <GraduationCap size={18} className={styles.pastelIcon} />
-                  <div className={styles.pastelLabel}>{t('about.university', lang)}</div>
-                  <div className={styles.pastelValue}>{data.university}</div>
-                </div>
-                <div className={styles.pastelCard}>
-                  <BookOpen size={18} className={styles.pastelIcon} />
-                  <div className={styles.pastelLabel}>{t('about.semester', lang)}</div>
-                  <div className={styles.pastelValue}>{data.semester}</div>
-                </div>
-                <div className={styles.pastelCard}>
-                  <MapPin size={18} className={styles.pastelIcon} />
-                  <div className={styles.pastelLabel}>{t('about.location', lang)}</div>
-                  <div className={styles.pastelValue}>{data.location}</div>
-                </div>
-              </div>
+              {pastelCards.map((card) => {
+                const Icon = card.icon
+                return (
+                  <motion.div key={card.labelKey} className={styles.pastelCard} variants={cardItem}>
+                    <Icon size={18} className={styles.pastelIcon} />
+                    <div className={styles.pastelLabel}>{t(card.labelKey, lang)}</div>
+                    <div className={styles.pastelValue}>{card.value}</div>
+                  </motion.div>
+                )
+              })}
             </motion.div>
 
             <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.4 }}
             >
               <a href={data.cvUrl} download>
                 <Button variant="dark">

@@ -1,72 +1,51 @@
 .carousel {
-  position: relative;
   width: 100%;
+  position: relative;
 }
 
 .viewport {
   overflow: hidden;
   width: 100%;
+  position: relative;
 }
 
-.track {
+.page {
   display: flex;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .slide {
-  padding-right: 1rem;
-  box-sizing: border-box;
-  display: flex;
-}
-
-.slide:last-child {
-  padding-right: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
 }
 
 .dot {
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: var(--color-border);
-  border: none;
+  transition:
+    width var(--transition-base),
+    background var(--transition-base);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  padding: 0;
-}
-
-.dot:hover {
-  background: var(--color-text-muted);
 }
 
 .dotActive {
-  background: var(--color-primary);
   width: 1.5rem;
-  border-radius: 999px;
+  background: var(--color-primary);
 }
 
 @media (max-width: 639px) {
-  .slide,
-  .slide:last-child {
-    padding-right: 0;
-  }
-
-  .dot {
-    width: 0.5625rem;
-    height: 0.5625rem;
-  }
-
-  .dotActive {
-    width: 1.5rem;
-  }
-
-  .dots {
-    gap: 0.625rem;
-    margin-top: 1rem;
+  .page {
+    flex-direction: column;
+    gap: 1rem;
   }
 }

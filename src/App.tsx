@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import Header from './components/layouts/Header'
+import Nav from './components/layouts/Nav'
 import Footer from './components/layouts/Footer'
 import Hero from './components/sections/Hero/Hero'
 import './App.css'
@@ -9,6 +9,7 @@ const Technologies = lazy(() => import('./components/sections/Technologies/Techn
 const Projects = lazy(() => import('./components/sections/Projects/Projects'))
 const Experience = lazy(() => import('./components/sections/Experience/Experience'))
 const Contact = lazy(() => import('./components/sections/Contact/Contact'))
+const ScrollToTop = lazy(() => import('./components/ui/ScrollToTop'))
 
 function SectionFallback() {
   return <div style={{ minHeight: '100dvh' }} />
@@ -17,7 +18,7 @@ function SectionFallback() {
 export default function App() {
   return (
     <div className="app">
-      <Header />
+      <Nav />
       <main className="main">
         <Hero />
         <Suspense fallback={<SectionFallback />}>
@@ -37,6 +38,9 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
+      <Suspense>
+        <ScrollToTop />
+      </Suspense>
     </div>
   )
 }

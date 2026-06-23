@@ -9,7 +9,6 @@
   justify-content: center;
   width: 100%;
   max-width: 100vw;
-  flex-direction: column;
 }
 
 .bgImage {
@@ -45,17 +44,25 @@
 }
 
 .inner {
-  max-width: 900px;
+  max-width: 1100px;
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* ── Left Column ── */
+
+.leftCol {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  align-items: flex-start;
 }
 
 .eyebrow {
@@ -77,7 +84,7 @@
 
 [data-theme="dark"] .eyebrow {
   background: rgba(15, 23, 42, 0.85);
-  color: #94A3B8;
+  color: #94a3b8;
 }
 
 .eyebrowDot {
@@ -90,40 +97,38 @@
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 5vw, var(--text-display));
+  font-size: clamp(2rem, 5vw, var(--text-display));
   font-weight: 700;
-  line-height: var(--leading-display);
+  line-height: 1.1;
   letter-spacing: var(--tracking-display);
   color: #ffffff;
   max-width: 100%;
-  width: 100%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
 }
 
-.subhead {
+.typewriter {
   font-family: var(--font-body);
   font-size: var(--text-subheading);
   font-weight: 400;
-  line-height: var(--leading-subheading);
   color: rgba(255, 255, 255, 0.9);
-  max-width: 540px;
-  width: 100%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  overflow-wrap: break-word;
+  min-height: 1.7em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cursor {
+  color: var(--color-primary);
+  font-weight: 300;
+  animation: blink 0.8s step-end infinite;
+  margin-left: 0.125rem;
 }
 
 .ctas {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .darkBtn {
@@ -139,7 +144,10 @@
   font-weight: 600;
   font-family: var(--font-body);
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast),
+    box-shadow var(--transition-fast);
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
@@ -151,14 +159,9 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.darkBtn:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-}
-
 [data-theme="dark"] .darkBtn {
   background: rgba(15, 23, 42, 0.92);
-  color: #F8FAFC;
+  color: #f8fafc;
 }
 
 [data-theme="dark"] .darkBtn:hover {
@@ -178,7 +181,9 @@
   color: var(--color-text-primary);
   border: none;
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
@@ -190,14 +195,9 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.whiteBtn:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-}
-
 [data-theme="dark"] .whiteBtn {
   background: rgba(255, 255, 255, 0.08);
-  color: #F8FAFC;
+  color: #f8fafc;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -206,39 +206,201 @@
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-.techRow {
-  width: 100%;
-  padding-top: 0.5rem;
+.socialLinks {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.socialLink:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .socialLink {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .socialLink:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ── Right Column ── */
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.photoWrap {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 3px solid var(--color-primary);
+  box-shadow:
+    0 0 28px var(--color-primary-glow),
+    0 0 60px rgba(6, 182, 212, 0.08);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .photoWrap {
+  box-shadow:
+    0 0 28px var(--color-primary-glow),
+    0 0 60px rgba(34, 211, 238, 0.08);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ── Marquee ── */
+
+.marqueeWrap {
+  width: 100%;
+  max-width: 360px;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
+.marqueeTrack {
+  display: flex;
+  width: fit-content;
+  gap: 2rem;
+  padding: 0.25rem 0;
+  animation: marquee 30s linear infinite;
+}
+
+.marqueeWrap:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+.marqueeIcon {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.65);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.marqueeIcon:hover {
+  color: rgba(255, 255, 255, 1);
+  transform: scale(1.15);
+}
+
+/* ── Scroll Indicator ── */
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  animation: bounce 2s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 2;
+  transition: background var(--transition-fast);
+}
+
+.scrollIndicator:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="dark"] .scrollIndicator {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+/* ── Responsive ── */
+
 @media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
   .headline {
-    font-size: clamp(1.5rem, 6vw, var(--text-heading-lg));
+    font-size: clamp(1.5rem, 5vw, var(--text-heading-lg));
+  }
+
+  .photoWrap {
+    width: 200px;
+    height: 200px;
   }
 }
 
 @media (max-width: 767px) {
   .hero {
     min-height: 100dvh;
+    padding-bottom: 5rem;
   }
 
   .inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
     padding: 4.5rem 1.25rem 2.5rem;
-    width: 100%;
+    text-align: center;
+  }
+
+  .leftCol {
+    align-items: center;
+    text-align: center;
   }
 
   .headline {
     font-size: clamp(1.4rem, 5.5vw, var(--text-heading));
-    letter-spacing: 0.005em;
-    line-height: 1.1;
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
+    text-align: center;
   }
 
-  .subhead {
+  .typewriter {
     font-size: 0.9375rem;
-    max-width: 100%;
+    justify-content: center;
   }
 
   .ctas {
@@ -256,21 +418,34 @@
     font-size: 0.8125rem;
     gap: 0.375rem;
   }
+
+  .socialLinks {
+    justify-content: center;
+  }
+
+  .photoWrap {
+    width: 180px;
+    height: 180px;
+  }
+
+  .scrollIndicator {
+    bottom: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .inner {
     padding: 3.5rem 0.875rem 2rem;
-    gap: 0.875rem;
+    gap: 1.5rem;
   }
 
   .headline {
     font-size: 1.2rem;
-    letter-spacing: 0;
-    line-height: 1.15;
+    text-align: center;
+    width: 100%;
   }
 
-  .subhead {
+  .typewriter {
     font-size: 0.8125rem;
   }
 
@@ -288,23 +463,26 @@
     padding: 0.45rem 0.875rem;
     font-size: 0.78125rem;
   }
+
+  .photoWrap {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 @media (max-width: 375px) {
   .inner {
     padding: 3rem 0.625rem 1.5rem;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
   .headline {
     font-size: 1.05rem;
-    letter-spacing: 0;
-    word-break: break-word;
-    hyphens: auto;
-    line-height: 1.2;
+    width: 100%;
+    text-align: center;
   }
 
-  .subhead {
+  .typewriter {
     font-size: 0.75rem;
   }
 
@@ -316,5 +494,10 @@
   .whiteBtn {
     padding: 0.4rem 0.75rem;
     font-size: 0.75rem;
+  }
+
+  .photoWrap {
+    width: 130px;
+    height: 130px;
   }
 }

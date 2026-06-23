@@ -1,31 +1,73 @@
-import { useMemo } from 'react'
-import { Code2, MessageCircle } from 'lucide-react'
-import { motion, type Variants } from 'framer-motion'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { Code2, MessageCircle, ChevronDown } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { useLanguage } from '../../../context/LanguageContext'
 import { getPortfolioData, t } from '../../../data/portfolio'
-import { easeOut, backInDown, backInDownSimple } from '../../../lib/motion'
-import IconCarousel from '../../ui/IconCarousel'
+import { cinematicLeft, cinematicRight } from '../../../lib/motion'
+import techIcons from '../../../data/techIcons'
 import styles from './Hero.module.css'
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { ...easeOut, delay: i * 0.1 },
-  }),
-}
+const marqueeTechs = ['React', 'TypeScript', 'Node.js', 'Python', 'Docker', 'Java']
+const filteredIcons = techIcons.filter(icon => marqueeTechs.includes(icon.name))
+
+const ROLES = [
+  'Desarrollador Full Stack',
+  'Desarrollador React',
+  'Entusiasta de IA',
+  'Desarrollador Backend',
+]
+
+const TYPE_SPEED = 80
+const ERASE_SPEED = 40
+const PAUSE_TIME = 2000
 
 export default function Hero() {
   const { lang } = useLanguage()
   const data = getPortfolioData(lang)
-  const isMobile = useMemo(
-    () => window.matchMedia('(max-width: 767px)').matches,
-    [],
-  )
 
-  const headVariant = isMobile ? backInDownSimple : backInDown
-  const iconSize = isMobile ? 16 : 18
+  const [displayText, setDisplayText] = useState('')
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const timeoutRef = useRef<number>(0)
+
+  const tick = useCallback(() => {
+    const currentRole = ROLES[roleIndex]
+
+    if (!isDeleting) {
+      const next = currentRole.slice(0, displayText.length + 1)
+      if (next === currentRole) {
+        timeoutRef.current = window.setTimeout(() => setIsDeleting(true), PAUSE_TIME)
+      } else {
+        timeoutRef.current = window.setTimeout(() => {}, TYPE_SPEED)
+      }
+      setDisplayText(next)
+    } else {
+      const next = currentRole.slice(0, displayText.length - 1)
+      if (next === '') {
+        setIsDeleting(false)
+        setRoleIndex(prev => (prev + 1) % ROLES.length)
+        timeoutRef.current = window.setTimeout(() => {}, 200)
+      } else {
+        timeoutRef.current = window.setTimeout(() => {}, ERASE_SPEED)
+      }
+      setDisplayText(next)
+    }
+  }, [displayText, isDeleting, roleIndex])
+
+  useEffect(() => {
+    const delay = isDeleting ? ERASE_SPEED : displayText === '' ? 200 : TYPE_SPEED
+    timeoutRef.current = window.setTimeout(tick, delay)
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [tick, displayText, isDeleting])
+
+  const scrollToAbout = () => {
+    const el = document.querySelector('#about')
+    el?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const iconSize = 18
 
   return (
     <section id="hero" className={styles.hero}>
@@ -43,64 +85,114 @@ export default function Hero() {
       <div className={styles.imageFade} aria-hidden="true" />
 
       <div className={styles.inner}>
+        {/* ── Left Column ── */}
         <motion.div
-          className={styles.eyebrow}
-          variants={fadeUp}
+          className={styles.leftCol}
+          variants={cinematicLeft}
           initial="hidden"
           animate="visible"
-          custom={0}
         >
-          <span className={styles.eyebrowDot} aria-hidden="true" />
-          {t('hero.eyebrow', lang)}
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} aria-hidden="true" />
+            {t('hero.eyebrow', lang)}
+          </div>
+
+          <h1 className={styles.headline}>{data.name}</h1>
+
+          <span className={styles.typewriter}>
+            {displayText}
+            <span className={styles.cursor}>|</span>
+          </span>
+
+          <div className={styles.ctas}>
+            <a href="#projects" className={styles.darkBtn}>
+              <Code2 size={iconSize} />
+              {t('hero.projectsBtn', lang)}
+            </a>
+            <a href="#contact" className={styles.whiteBtn}>
+              <MessageCircle size={iconSize} />
+              {t('hero.contactBtn', lang)}
+            </a>
+          </div>
+
+          <div className={styles.socialLinks}>
+            <a
+              href={data.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="GitHub"
+            >
+              <img src="/github-icon.svg" alt="" width="20" height="20" />
+            </a>
+            <a
+              href={data.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="LinkedIn"
+            >
+              <img src="/linkedin.png" alt="" width="20" height="20" />
+            </a>
+            <a
+              href={data.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="Instagram"
+            >
+              <img src="/instagram.png" alt="" width="20" height="20" />
+            </a>
+          </div>
         </motion.div>
 
-        <motion.h1
-          className={styles.headline}
-          variants={headVariant}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-        >
-          {data.name}
-        </motion.h1>
-
-        <motion.p
-          className={styles.subhead}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={1}
-        >
-          {data.role}
-        </motion.p>
-
+        {/* ── Right Column ── */}
         <motion.div
-          className={styles.ctas}
-          variants={fadeUp}
+          className={styles.rightCol}
+          variants={cinematicRight}
           initial="hidden"
           animate="visible"
-          custom={2}
         >
-          <a href="#projects" className={styles.darkBtn}>
-            <Code2 size={iconSize} />
-            {t('hero.projectsBtn', lang)}
-          </a>
-          <a href="#contact" className={styles.whiteBtn}>
-            <MessageCircle size={iconSize} />
-            {t('hero.contactBtn', lang)}
-          </a>
-        </motion.div>
+          <div className={`${styles.photoWrap} ${styles.floating}`}>
+            <img
+              src="/DRRL.png"
+              alt="Daniel Ramón Reina López"
+              className={styles.photo}
+              loading="eager"
+              width="320"
+              height="320"
+            />
+          </div>
 
-        <motion.div
-          className={styles.techRow}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={3}
-        >
-          <IconCarousel />
+          <div className={styles.marqueeWrap}>
+            <div className={styles.marqueeTrack}>
+              {filteredIcons
+                .concat(filteredIcons)
+                .map((icon, i) => (
+                  <span
+                    key={i}
+                    className={styles.marqueeIcon}
+                    title={icon.name}
+                    dangerouslySetInnerHTML={{
+                      __html: icon.svg.replace(
+                        '<svg',
+                        '<svg width="28" height="28"',
+                      ),
+                    }}
+                  />
+                ))}
+            </div>
+          </div>
         </motion.div>
       </div>
+
+      <button
+        className={styles.scrollIndicator}
+        onClick={scrollToAbout}
+        aria-label="Scroll to about"
+      >
+        <ChevronDown size={18} />
+      </button>
     </section>
   )
 }

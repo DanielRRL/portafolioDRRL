@@ -1,10 +1,10 @@
 import { Monitor, Server, Database, Cloud, Shield, Sparkles } from 'lucide-react'
-import { motion, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import SectionTitle from '../../ui/SectionTitle'
 import ClosingPlasma from '../../ui/ClosingPlasma'
 import { useLanguage } from '../../../context/LanguageContext'
 import { getPortfolioData, t, techCategoryLabel } from '../../../data/portfolio'
-import { easeOutFast } from '../../../lib/motion'
+import { staggerContainer, staggerItem } from '../../../lib/motion'
 import styles from './Technologies.module.css'
 
 const categoryIcons: Record<string, typeof Monitor> = {
@@ -16,17 +16,23 @@ const categoryIcons: Record<string, typeof Monitor> = {
   ai: Sparkles,
 }
 
-const stagger: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.05 },
-  },
-}
+const orbitIcons = [
+  { Icon: Monitor, label: 'Frontend' },
+  { Icon: Server, label: 'Backend' },
+  { Icon: Database, label: 'Database' },
+  { Icon: Cloud, label: 'DevOps' },
+  { Icon: Shield, label: 'Auth' },
+  { Icon: Sparkles, label: 'AI' },
+]
 
-const item: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: easeOutFast },
-}
+const ORBIT_POSITIONS = [
+  { left: 'calc(50% + 48%)', top: '50%' },
+  { left: 'calc(50% + 24%)', top: 'calc(50% + 41.569%)' },
+  { left: 'calc(50% - 24%)', top: 'calc(50% + 41.569%)' },
+  { left: 'calc(50% - 48%)', top: '50%' },
+  { left: 'calc(50% - 24%)', top: 'calc(50% - 41.569%)' },
+  { left: 'calc(50% + 24%)', top: 'calc(50% - 41.569%)' },
+]
 
 export default function Technologies() {
   const { lang } = useLanguage()
@@ -52,6 +58,7 @@ export default function Technologies() {
       />
       <div className={styles.fadeTop} />
       <div className={styles.fadeBottom} />
+
       <div className={styles.inner}>
         <SectionTitle
           label={t('tech.label', lang)}
@@ -60,31 +67,70 @@ export default function Technologies() {
           center
         />
 
-        {Object.entries(data.technologies).map(([category, techs]) => {
-          const Icon = categoryIcons[category] ?? Monitor
-          return (
-            <motion.div
-              key={category}
-              className={styles.category}
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-40px' }}
-            >
-              <div className={styles.categoryLabel}>
-                {techCategoryLabel(category, lang)}
+        {/* Orbit */}
+        <motion.div
+          className={styles.orbitSection}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+        >
+          <div className={`${styles.orbitRing} ${styles.spinning}`}>
+            <div className={styles.orbitPhoto}>
+              <img
+                src="/DRRL.png"
+                alt="Daniel Ramón Reina López"
+                className={styles.orbitImg}
+                loading="lazy"
+                width="200"
+                height="200"
+              />
+            </div>
+            {orbitIcons.map(({ Icon, label }, i) => (
+              <div
+                key={label}
+                className={`${styles.orbitIcon} ${styles.counterSpin}`}
+                style={{
+                  left: ORBIT_POSITIONS[i].left,
+                  top: ORBIT_POSITIONS[i].top,
+                  transform: 'translate(-50%, -50%)',
+                  animationDelay: `${-i * 6}s`,
+                }}
+                title={label}
+              >
+                <Icon size={22} />
               </div>
-              <motion.div className={styles.grid} variants={stagger}>
-                {techs.map(tech => (
-                  <motion.div key={tech} className={styles.techCard} variants={item}>
-                    <Icon className={styles.techIcon} />
-                    <span className={styles.techName}>{tech}</span>
-                  </motion.div>
-                ))}
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Category Cards */}
+        <motion.div
+          className={styles.categories}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+        >
+          {Object.entries(data.technologies).map(([cat, techs]) => {
+            const CatIcon = categoryIcons[cat] ?? Monitor
+            return (
+              <motion.div key={cat} className={styles.categoryCard} variants={staggerItem}>
+                <div className={styles.categoryLabel}>
+                  {techCategoryLabel(cat, lang)}
+                </div>
+                <div className={styles.chipGrid}>
+                  {techs.map(tech => (
+                    <span key={tech} className={styles.chip}>
+                      <CatIcon size={14} className={styles.chipIcon} />
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
-            </motion.div>
-          )
-        })}
+            )
+          })}
+        </motion.div>
       </div>
     </section>
   )

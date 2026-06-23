@@ -5,6 +5,7 @@ export const easeOutFast: Transition = { duration: 0.35, ease: [0.25, 0.4, 0.25,
 export const easeOutSlow: Transition = { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const }
 export const easeOutCard: Transition = { duration: 0.45, ease: [0.25, 0.4, 0.25, 1] as const }
 export const easeOutX: Transition = { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] as const }
+export const easeInOut: Transition = { duration: 0.35, ease: 'easeInOut' as const }
 
 export const backInDown: Variants = {
   hidden: { opacity: 0, y: -80, rotateX: 8, scale: 0.94 },
@@ -55,4 +56,36 @@ export const bounceInLeftSimple: Variants = {
     x: 0,
     transition: { ...easeOut, delay: i * 0.05 },
   }),
+}
+
+export const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.2 },
+  },
+}
+
+export const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: easeOutFast },
+}
+
+export const slideUpFade: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: easeOut },
+}
+
+export const cinematicLeft: Variants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] } },
+}
+
+export const cinematicRight: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.7, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] } },
+}
+
+export const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.2, ease: [0.25, 0.4, 0.25, 1] } },
 }
