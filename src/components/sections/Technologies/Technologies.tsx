@@ -16,22 +16,48 @@ const categoryIcons: Record<string, typeof Monitor> = {
   ai: Sparkles,
 }
 
-const orbitIcons = [
-  { Icon: Monitor, label: 'Frontend' },
-  { Icon: Server, label: 'Backend' },
-  { Icon: Database, label: 'Database' },
-  { Icon: Cloud, label: 'DevOps' },
-  { Icon: Shield, label: 'Auth' },
-  { Icon: Sparkles, label: 'AI' },
+const TECH_ICONS = [
+  { src: '/react.svg', label: 'React' },
+  { src: '/typescript-icon.svg', label: 'TypeScript' },
+  { src: '/nodejs-icon.svg', label: 'Node.js' },
+  { src: '/python.svg', label: 'Python' },
+  { src: '/java.svg', label: 'Java' },
+  { src: '/go.svg', label: 'Go' },
+  { src: '/dart.svg', label: 'Dart' },
+  { src: '/php.svg', label: 'PHP' },
+  { src: '/docker-icon.svg', label: 'Docker' },
+  { src: '/postgresql.svg', label: 'PostgreSQL' },
+  { src: '/mongodb-icon.svg', label: 'MongoDB' },
+  { src: '/express.svg', label: 'Express' },
+  { src: '/fastapi-icon.svg', label: 'FastAPI' },
+  { src: '/spring.svg', label: 'Spring' },
+  { src: '/gin.svg', label: 'Gin' },
+  { src: '/flutter.svg', label: 'Flutter' },
+  { src: '/linux-tux.svg', label: 'Linux' },
+  { src: '/ubuntu.svg', label: 'Ubuntu' },
+  { src: '/github-icon.svg', label: 'GitHub' },
 ]
 
 const ORBIT_POSITIONS = [
   { left: 'calc(50% + 48%)', top: '50%' },
-  { left: 'calc(50% + 24%)', top: 'calc(50% + 41.569%)' },
-  { left: 'calc(50% - 24%)', top: 'calc(50% + 41.569%)' },
-  { left: 'calc(50% - 48%)', top: '50%' },
-  { left: 'calc(50% - 24%)', top: 'calc(50% - 41.569%)' },
-  { left: 'calc(50% + 24%)', top: 'calc(50% - 41.569%)' },
+  { left: 'calc(50% + 45.40%)', top: 'calc(50% + 15.59%)' },
+  { left: 'calc(50% + 37.88%)', top: 'calc(50% + 29.49%)' },
+  { left: 'calc(50% + 26.24%)', top: 'calc(50% + 40.20%)' },
+  { left: 'calc(50% + 11.84%)', top: 'calc(50% + 46.52%)' },
+  { left: 'calc(50% - 3.96%)', top: 'calc(50% + 47.84%)' },
+  { left: 'calc(50% - 19.30%)', top: 'calc(50% + 43.97%)' },
+  { left: 'calc(50% - 32.50%)', top: 'calc(50% + 35.32%)' },
+  { left: 'calc(50% - 42.24%)', top: 'calc(50% + 22.79%)' },
+  { left: 'calc(50% - 47.33%)', top: 'calc(50% + 8.00%)' },
+  { left: 'calc(50% - 47.33%)', top: 'calc(50% - 8.00%)' },
+  { left: 'calc(50% - 42.24%)', top: 'calc(50% - 22.79%)' },
+  { left: 'calc(50% - 32.50%)', top: 'calc(50% - 35.32%)' },
+  { left: 'calc(50% - 19.30%)', top: 'calc(50% - 43.97%)' },
+  { left: 'calc(50% - 3.96%)', top: 'calc(50% - 47.84%)' },
+  { left: 'calc(50% + 11.84%)', top: 'calc(50% - 46.52%)' },
+  { left: 'calc(50% + 26.24%)', top: 'calc(50% - 40.20%)' },
+  { left: 'calc(50% + 37.88%)', top: 'calc(50% - 29.49%)' },
+  { left: 'calc(50% + 45.40%)', top: 'calc(50% - 15.59%)' },
 ]
 
 export default function Technologies() {
@@ -67,7 +93,6 @@ export default function Technologies() {
           center
         />
 
-        {/* Orbit */}
         <motion.div
           className={styles.orbitSection}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -86,25 +111,30 @@ export default function Technologies() {
                 height="200"
               />
             </div>
-            {orbitIcons.map(({ Icon, label }, i) => (
+            {TECH_ICONS.map(({ src, label }, i) => (
               <div
-                key={label}
+                key={src}
                 className={`${styles.orbitIcon} ${styles.counterSpin}`}
                 style={{
                   left: ORBIT_POSITIONS[i].left,
                   top: ORBIT_POSITIONS[i].top,
-                  transform: 'translate(-50%, -50%)',
-                  animationDelay: `${-i * 6}s`,
+                  animationDelay: `${-i * 1.895}s`,
                 }}
                 title={label}
               >
-                <Icon size={22} />
+                <img
+                  src={src}
+                  alt={label}
+                  className={styles.orbitSvg}
+                  loading="lazy"
+                  width="36"
+                  height="36"
+                />
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Category Cards */}
         <motion.div
           className={styles.categories}
           variants={staggerContainer}
