@@ -69,6 +69,7 @@
 
 .spinning {
   animation: orbitSpin 36s linear infinite;
+  will-change: transform;
 }
 
 .orbitPhoto {
@@ -141,6 +142,7 @@
 
 .counterSpin {
   animation: orbitSpin 36s linear infinite reverse;
+  will-change: transform;
 }
 
 /* ── Category Cards ── */
@@ -285,5 +287,14 @@
     height: 26px;
     margin-left: -13px;
     margin-top: -13px;
+  }
+}
+
+@keyframes orbitSpin {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
   }
 }

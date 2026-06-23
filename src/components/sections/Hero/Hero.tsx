@@ -3,7 +3,7 @@ import { Code2, MessageCircle, ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '../../../context/LanguageContext'
 import { getPortfolioData, t } from '../../../data/portfolio'
-import { cinematicLeft, cinematicRight } from '../../../lib/motion'
+import { cinematicLeft } from '../../../lib/motion'
 import styles from './Hero.module.css'
 
 const MARQUEE_ICONS = [
@@ -103,9 +103,8 @@ export default function Hero() {
       <div className={styles.imageFade} aria-hidden="true" />
 
       <div className={styles.inner}>
-        {/* ── Left Column ── */}
         <motion.div
-          className={styles.leftCol}
+          className={styles.content}
           variants={cinematicLeft}
           initial="hidden"
           animate="visible"
@@ -162,37 +161,12 @@ export default function Hero() {
               <img src="/instagram.png" alt="" width="20" height="20" />
             </a>
           </div>
-        </motion.div>
-
-        {/* ── Right Column ── */}
-        <motion.div
-          className={styles.rightCol}
-          variants={cinematicRight}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className={`${styles.photoWrap} ${styles.floating}`}>
-            <img
-              src="/DRRL.png"
-              alt="Daniel Ramón Reina López"
-              className={styles.photo}
-              loading="eager"
-              width="320"
-              height="320"
-            />
-          </div>
 
           <div className={styles.marqueeWrap}>
             <div className={styles.marqueeTrack}>
               {MARQUEE_ICONS.concat(MARQUEE_ICONS).map((src, i) => (
                 <span key={i} className={styles.marqueeIcon}>
-                  <img
-                    src={src}
-                    alt=""
-                    width="30"
-                    height="30"
-                    loading="lazy"
-                  />
+                  <img src={src} alt="" width="30" height="30" loading="lazy" />
                 </span>
               ))}
             </div>
