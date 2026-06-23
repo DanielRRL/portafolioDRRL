@@ -4,11 +4,29 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../../../context/LanguageContext'
 import { getPortfolioData, t } from '../../../data/portfolio'
 import { cinematicLeft, cinematicRight } from '../../../lib/motion'
-import techIcons from '../../../data/techIcons'
 import styles from './Hero.module.css'
 
-const marqueeTechs = ['React', 'TypeScript', 'Node.js', 'Python', 'Docker', 'Java']
-const filteredIcons = techIcons.filter(icon => marqueeTechs.includes(icon.name))
+const MARQUEE_ICONS = [
+  '/react.svg',
+  '/typescript-icon.svg',
+  '/nodejs-icon.svg',
+  '/python.svg',
+  '/java.svg',
+  '/go.svg',
+  '/dart.svg',
+  '/php.svg',
+  '/docker-icon.svg',
+  '/postgresql.svg',
+  '/mongodb-icon.svg',
+  '/express.svg',
+  '/fastapi-icon.svg',
+  '/spring.svg',
+  '/gin.svg',
+  '/flutter.svg',
+  '/linux-tux.svg',
+  '/ubuntu.svg',
+  '/github-icon.svg',
+]
 
 const ROLES = [
   'Desarrollador Full Stack',
@@ -166,21 +184,17 @@ export default function Hero() {
 
           <div className={styles.marqueeWrap}>
             <div className={styles.marqueeTrack}>
-              {filteredIcons
-                .concat(filteredIcons)
-                .map((icon, i) => (
-                  <span
-                    key={i}
-                    className={styles.marqueeIcon}
-                    title={icon.name}
-                    dangerouslySetInnerHTML={{
-                      __html: icon.svg.replace(
-                        '<svg',
-                        '<svg width="28" height="28"',
-                      ),
-                    }}
+              {MARQUEE_ICONS.concat(MARQUEE_ICONS).map((src, i) => (
+                <span key={i} className={styles.marqueeIcon}>
+                  <img
+                    src={src}
+                    alt=""
+                    width="30"
+                    height="30"
+                    loading="lazy"
                   />
-                ))}
+                </span>
+              ))}
             </div>
           </div>
         </motion.div>
