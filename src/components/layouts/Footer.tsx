@@ -77,7 +77,7 @@ export default function Footer() {
                 <MapPin className={styles.contactIcon} />
                 {data.location}
               </span>
-            </div>
+            </div>  
           </div>
         </div>
 
